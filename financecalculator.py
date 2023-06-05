@@ -1,0 +1,36 @@
+import math
+
+print("investment = to calculate the amount of interest you will earn on your investment") #describe investment choice
+print("bond = to calculate the amount you will have to pay on a home loan") #describe bond choice
+user_choice = input("Enter either investment or bond from the above menu to proceed. > ").lower() 
+#this message prompts the user to choose an option #and converts input to lowercase 
+
+if user_choice == "investment":           #if investment is chosen
+    deposit = float(input("Please input how much you are depositing. \n"))   #request amount deposited
+    interest_rate = float(input("Please input your interest rate: \n"))/100 #request interest rate and divide by 100
+    investment_years = float(input("Input the number of the number of years you're investing for: \n")) #request investment period
+    choose_interest = input("Thank you. Please input if you want to see the simple or compound interest amount.\n")   
+    # request the type of interest to be received to simplify the code
+
+    simple_interest = deposit*(1 + interest_rate*investment_years) #simple interest calculation
+    format_simple = "{:.2f}".format(simple_interest) #format outpout to two decimal places
+    if choose_interest == "simple": #if user chooses simple interest
+        print(f'Your return on this investment after', investment_years, "is: £",format_simple) #print answer
+
+    compound_interest = deposit *(math.pow((1+interest_rate),investment_years)) #compount interest calculation
+    format_compound = "{:.2f}".format(compound_interest) #format outpout to two decimal places
+    if choose_interest == "compound": #compound interest calculation
+        print(f'Your return on this investment after', investment_years, "is: £",format_compound) #print answer
+    #output shows appropriate interest depending on option chosen #f strings used to display calculation smoothly
+
+if user_choice ==  "bond":          #if bond is chosen
+    house_value = float(input("What is the present value of the house? \n")) #user inputs house value #convert string to float
+    house_interest_rate = float(input("What is the interest rate on your house? \n"))/100 #user inputs interest rate and divide by 100 
+    bond_months = float(input("How many months to repay your loan? \n")) #user inputs months to repay bond #convert string to float
+    repayment = (house_interest_rate*house_value/(1-(1+house_interest_rate)**(-bond_months)))
+    format_repayment = "{:.2f}".format(repayment) #format outpout to two decimal places
+    print(f'Your monthly payments will be £',format_repayment) #f string used to display calculation smoothly
+    #calculation shows how much the user will repay per month 
+
+else: #if user enters anything but bond or investment
+    print ("You have not selected an option. Please select either investment or bond") #error message appears
